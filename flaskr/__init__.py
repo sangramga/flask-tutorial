@@ -25,5 +25,9 @@ def create_app(test_config=None):
     # Init DB during startup
     from . import db
     db.init_app(app)
+
+    # Register auth blueprint in auth.py file
+    from . import auth
+    app.register_blueprint(auth.bp)
     
     return app

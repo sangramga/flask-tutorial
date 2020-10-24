@@ -51,7 +51,47 @@ Use DB connection to perform queries and operations, close connection after work
 ````
 $ flask init-db
 Database initiated !!
+$ export FLASK_APP=flaskr
+$ export FLASK_ENV=development
+$ flask run  
+
+* Serving Flask app "flaskr" (lazy loading)
+* Environment: development
+* Debug mode: on
+* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ````
+
+------------------------------
+
+## Blueprints and Views
+* `Views` can take matching pattern URL's,  and returns outgoing response. Flask can also generate URL as output of view dependning upon its name and arguments.  
+
+* `Blueprint` is used to register related `views` within itself. Then the `blueprint` is registered with the application instead of registering `views` directly.  
+
+* In this `flaskr` app, two blueprints will be created one for `auth` and other for `blogs`. Check `auth.py` for  blueprint and related views.
+
+### Register Blueprint
+* `Blueprint()` is used to create blueprint with `url_prefix='auth'` and `app.register_blueprint()` is used to register with app.
+* The `auth` Bluprint will have views to register, login and logout.
+
+### Register Views
+* **`@bp.route`** associates URL `\register` with `register` view function
+* **`request.form`** is a special type of dict mapping submitted form keys and values. The user will input their username and password in POST method.
+* **`generate_password_hash`** is used for storing hashes of passwords in DB, if validations are successful.
+* After storing the user, they are redirected to the login page. **`url_for()`** generates the URL for the login view based on its name. This is preferable to writing the URL directly as it allows you to change the URL later without changing all code that links to it.
+* `redirect()` to a particular URL of a view or a page. `flash` used to store and display error messages.
+* `render_template()` will render HTML page templates in case of `GET` requests.
+
+## Login/Logout view
+* **`session`** is a dict to store cookie in a browser to identify user in case of re-visiting the site. Flask securely signs the cookies so that it cannot be tempered.  
+
+* `bp.before_app_request()` registers a function that runs before the view function, no matter what URL is requested. `load_logged_in_user` checks if a user id is stored in the session and gets that user’s data from the database, storing it on `g.user`, which lasts for the length of the request. 
+
+* `\logout` view will clear the `session` cookies, so thath its not used for subsequent requests.  
+
+* `login_required` decorator can used to wrap other views like create, delete and edit blogs.
+
+
 
 
 
