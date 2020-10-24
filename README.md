@@ -20,6 +20,17 @@
 ## Application Setup
 
 ### Application Factory
-Instead of creating a **Flask** instance globally, you will create it inside a function. This function is known as the *application factory*. Any configuration, registration, and other setup the application needs will happen inside the function, then the application will be returned.
+Instead of creating a **Flask** instance globally, you will create it inside a function `create_app`. This function is known as the *application factory*. Any configuration, registration, and other setup the application needs will happen inside the function, then the application will be returned.
+
+### Running Flask App
+
+````
+$ export FLASK_APP=flaskr
+$ export FLASK_ENV=development
+$ flask run
+````
+
+
+
 
 
