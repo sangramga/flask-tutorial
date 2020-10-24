@@ -1,0 +1,5 @@
+{
+    "python.pythonPath": "/opt/conda/envs/flask/bin",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true
+}
