@@ -32,7 +32,7 @@ $ export FLASK_ENV=development
 $ flask run
 ````
 
-## Define and Access Database
+<h1> 2. Define and Access Database </h1>
 **SQLite** is convenient because it doesn’t require setting up a separate database server and is built-in to Python. Also light-weight and good for small applications.
 
 ### Connect to Database
@@ -63,7 +63,7 @@ $ flask run
 
 ------------------------------
 
-## Blueprints and Views
+<h1> 3. Blueprints and Views </h1>
 * `Views` can take matching pattern URL's,  and returns outgoing response. Flask can also generate URL as output of view dependning upon its name and arguments.  
 
 * `Blueprint` is used to register related `views` within itself. Then the `blueprint` is registered with the application instead of registering `views` directly.  
@@ -82,7 +82,7 @@ $ flask run
 * `redirect()` to a particular URL of a view or a page. `flash` used to store and display error messages.
 * `render_template()` will render HTML page templates in case of `GET` requests.
 
-## Login/Logout view
+### Login/Logout view
 * **`session`** is a dict to store cookie in a browser to identify user in case of re-visiting the site. Flask securely signs the cookies so that it cannot be tempered.  
 
 * `bp.before_app_request()` registers a function that runs before the view function, no matter what URL is requested. `load_logged_in_user` checks if a user id is stored in the session and gets that user’s data from the database, storing it on `g.user`, which lasts for the length of the request. 
@@ -91,9 +91,15 @@ $ flask run
 
 * `login_required` decorator can used to wrap other views like create, delete and edit blogs.
 
+------------------------------
+
+<h1> 4. Templates </h1>
+
+-----------------------------
+
+<h1> 5. Blog Blueprint </h1>
 
 
-
-
-
-
+# Register Blueprint for blogs
+* `app.add_url_rule()` associates the endpoint name `'index'` with the `/` url so that url_for('index') or url_for('blog.index') will both work, generating the same `/` URL either way.
+* 

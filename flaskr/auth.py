@@ -17,16 +17,18 @@ def register():
         #  the username and password POSTed in POST request of login form
         username = request.form['username']
         password = request.form['password']
+        print(f"username = {username}")
+        print(type(username))
         # validate credentials and raise error
         error = None
         db = get_db()
-        if username is None:
+        if username is None or username == "":
             error = "Username is required"
-        elif password is None:
+        elif password is None or password == "":
             error = "Password is required"
-        elif db.execute("SELECT * FROM users where username = ?",(username,)).fetchone():
+        elif db.execute("SELECT * FROM user where username = ?",(username,)).fetchone():
             error = "Username {} already exists".format(username)
-        if error is None:
+        elif error is None:
             # Commit user information to database
             db.execute("INSERT INTO user (username, password) VALUES (?, ?)",
                         (username, generate_password_hash(password)))
@@ -55,7 +57,7 @@ def login():
         if error is not None:
             flash(error)
 
-        user = db.execute("SELECT * from users where username = ?",(username,)).fetchone()
+        user = db.execute("SELECT * from user where username = ?",(username,)).fetchone()
         if user is None:
             error = "incorrect username"
         elif not check_password_hash(user['password'], password):
@@ -75,7 +77,7 @@ def load_logged_in_user():
         g.user = None
     else:
         g.user = get_db().execute(
-                                  "SELECT * FROM users where id = ?", (user_id,)
+                                  "SELECT * FROM user where id = ?", (user_id,)
                                   ).fetchone()
 
 @bp.route('/logout')
