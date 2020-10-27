@@ -102,4 +102,17 @@ $ flask run
 
 # Register Blueprint for blogs
 * `app.add_url_rule()` associates the endpoint name `'index'` with the `/` url so that url_for('index') or url_for('blog.index') will both work, generating the same `/` URL either way.
-* 
+
+
+-----------------------------
+<h1> 6. Make package installable </h1>
+
+# Added setup.py and MANIFEST.in  
+* In `setup.py`, `packages` tells which directories to include and `find_packages()` finds those directories automatically. To include static and templates `include_package_data = True` and `MANIFEST.in` file is also required.
+* For installation in editable/development mode `pip install -e .`. You can make changes without re-installing the package.
+*  `export FLASK_APP=flaskr` and `flask run` used to run app. Since it is installed, its possible to run it from anywhere, not just from flaskr directory.
+
+---------------------------------
+<h1> 7. Testing and Coverage</h1>
+
+* `pip install pytest coverage`
